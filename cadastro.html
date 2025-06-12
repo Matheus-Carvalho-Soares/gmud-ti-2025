@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Osiris</title>
+    <link rel="stylesheet" href="./css/style_cadastro.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="./index.html"><img src="./assets/img/logo_slogan_branco.png" width="300" id="logo_slogan_branco"></a>
+        <br>
+        <div class="box">
+            <h2 id="teste">Cadastro</h2>
+
+            <span>Nome da empresa:</span>
+            <input id="idEmpresa" type="text" placeholder="Nome da empresa">
+            <br>
+            <span>Endereço de email:</span>
+            <input id="idEmail" type="email" onInput="verificarEmail()" placeholder="exemplo@exemplo.com">
+            <br>
+            <span>Código da empresa:</span>
+            <input id="idCNPJ" type="text" maxlength=5 placeholder="A1B2C">
+            <br>
+            <span>Senha:</span>
+            <input id="idSenha" type="password" oninput="verificarSenha()" placeholder="digite aqui...">
+
+            <div id="div_msg"></div>
+
+            <button onClick="window.location='login.html'">Login</button>
+        </div>
+        <br>
+        <p>Não é um membro? <button onClick="enviar()" style="background-color: transparent">Cadastrar</button></p>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    var cont = 30;
+    var a = setInterval(() => {
+        teste.innerHTML = `Cadastro: ${cont} segundos restantes.`;
+        cont--;
+        if (cont == 0) {
+            alert("Tempo expirado!");
+            window.location = "index.html";
+        }
+    }, 1000);
+
+    var listaEmail = ["rodrigo@gmail.com", "marilia@gmail.com", "monteiro@gmail.com", "matheusReidocodigo@gmail.com"]
+    var listaSenha = ["amoMeuGrupo7𓅱", "devFrontEnd7𓅱", "semPalavrao7𓅱", "Atos-me-contrata7𓅱"]
+
+    function verificarSenha() {
+        var senha = idSenha.value;
+        var num = "7";
+        var carEsp = "𓂀 𓆣 𓇋 𓅱 𓂻 𓊃 𓃭 𓎛 𓏏 𓋴 𓐍 𓏤 𓇌 𓂧 𓆑";
+        var verificar_caracter_esp = 0;
+        var verificar_numero = 0;
+        var mensagem = "";
+        var senhaRepetida = "";
+
+        if (senha.length >= 12) {
+            mensagem += `<span style="color: green;">
+8文字以上あります (8 Mojiijō arimasu)</span> <br>`;
+        } else {
+            mensagem += `<span style="color: red;">
+8文字以上あります (8 Mojiijō arimasu)</span> <br>`;
+        }
+
+        if (!listaSenha.includes(senha)) {
+            mensagem += `<span style="color: green;">Senha jamais usada.</span> <br>`;
+        } else {
+            var index = listaSenha.indexOf(senha);
+            mensagem += `<span style="color: red;">Essa senha já está sendo utilizada pelo usuário: ${listaEmail[index]}</span> <br>`;
+        }
+
+        for (var j = 0; j < senha.length; j++) {
+            if (carEsp.includes(senha[j])) {
+                verificar_caracter_esp = 1;
+                j = (senha.length) - 1;
+            } else {
+                verificar_caracter_esp = 0;
+            }
+        }
+
+        if (verificar_caracter_esp == 1) {
+            mensagem += `<span style="color: green;">Contém pelo menos 1 hieróglifo</span> <br>`;
+        } else {
+            mensagem += `<span style="color: red;">Contém pelo menos 1 hieróglifo</span> <br>`;
+        }
+
+        for (var i = 0; i < senha.length; i++) {
+            if (num.includes(senha[i])) {
+                verificar_numero = 1;
+                i = (senha.length) - 1;
+            } else {
+                verificar_numero = 0;
+            }
+        }
+
+        if (verificar_numero == 1) {
+            mensagem += `<span style="color: green;">Contém o número preferido do irmão do Matheus</span> <br>`;
+        } else {
+            mensagem += `<span style="color: red;">Contém o número preferido do irmão do Matheus</span> <br>`;
+        }
+        div_msg.innerHTML = mensagem;
+        if (verificar_numero == 1 && verificar_caracter_esp == 1 && senha.length >= 8 && senha != senha.toLowerCase()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    function verificarEmail() {
+        var nome = idEmpresa.value;
+        var email = idEmail.value;
+        var cnpj = idCNPJ.value;
+        var senha = idSenha.value;
+        var num = "0123456789"
+        var carEsp = "!@#$%&*()."
+        var verify_email;
+        var verify_senha_min8;
+        var verify_senha_maisc;
+        var verify_senha_carac;
+        var verify_senha_num;
+
+        if (email.includes("@") && (email.endsWith(".com") || email.endsWith(".com.br") || email.endsWith(".org"))) {
+            verify_email = 1;
+        } else {
+            verify_email = 0;
+        }
+
+        if (verify_email == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function enviar() {
+        if (verificarEmail() && verificarSenha()) {
+            var nomeVar = idEmpresa.value;
+            var emailVar = idEmail.value;
+            var senhaVar = idSenha.value;
+            var cnpjVar = idCNPJ.value;
+        }
+    }
+</script>

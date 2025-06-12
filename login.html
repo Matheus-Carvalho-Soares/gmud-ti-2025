@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Osiris</title>
+    <link rel="stylesheet" href="./css/style_login.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <a href="./index.html"><img src="./assets/img/logo_slogan_branco.png" width="300" id="logo_slogan_branco"></a>
+        <br>
+        <div class="form-box">
+            <h2>Login</h2>
+
+            <span>Endereço de email:</span>
+            <input id="emailInput" type="email" placeholder="exemplo@exemplo.com">
+            <br><br>
+            <span>Senha:</span>
+            <input id="senhaInput" type="password" placeholder="digite aqui...">
+            <span>Palavra de segurança</span>
+            <input id="palavraInput" type="password" placeholder="digite aqui...">
+
+            <br>
+            <button onClick="entrar()">Enviar</button>
+        </div>
+        <br>
+        <p>Não é um membro? <a href="cadastro.html">Inscreva-se agora</a></p>
+    </div>
+</body>
+
+</html>
+<script>
+
+    var listaEmail = ["rodrigo@gmail.com", "marilia@gmail.com", "monteiro@gmail.com", "matheusReidocodigo@gmail.com"]
+    var listaSenha = ["amoMeuGrupo1𓅱", "devFrontEnd2𓅱", "semPalavrao1𓅱", "Atos-me-contrata𓅱"]
+    var listaPalavra = ["crossfit", "ferrari", "leticia", "uxMinhaPaixao"]
+
+
+    function entrar() {
+        var emailVar = emailInput.value;
+        var senhaVar = senhaInput.value;
+        var palavraVar = palavraInput.value;
+
+        if (emailVar == "" || senhaVar == "" || palavraVar == "") {
+            console.log("Mensagem de erro para todos os campos em branco");
+            return false;
+        } else {
+            for (var i = 0; i < listaEmail.length; i++) {
+                if (emailVar == listaEmail[i] && senhaVar == listaSenha[i]) {
+                    if (palavraVar != listaPalavra[i]) {
+                        alert(`Palavra de segurança errada. Resposta correta: ${listaPalavra[i]}`);
+                    } else {
+                        window.location = "dashboard.html";
+                    }
+                }
+            }
+        }
+    }
+</script>

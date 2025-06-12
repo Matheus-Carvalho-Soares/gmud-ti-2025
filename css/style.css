@@ -1,0 +1,287 @@
+/* Configurações padrão */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    --amerela: #F4C430;
+    --cinza: #1C1F20;
+}
+
+
+/* Cabeçalho */
+
+.navbar {
+    background-color: transparent;
+    width: 100%;
+    height: 80px;
+    z-index: 2;
+    position: absolute;
+    margin-top: 10px;
+}
+
+.navbar .conteudo {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .conteudo img {
+    width: 220px;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin: auto;
+}
+
+.links a {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    text-decoration: none;
+}
+
+.botao button {
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Fim cabeçalho */
+
+
+/* banner */
+.banner img {
+  object-fit: cover;
+    width: 100%;
+    height: 100vh;
+    filter: brightness(50%);
+    
+}
+
+.banner .texto {
+    display: flex;
+    z-index: 2;
+    position: absolute;
+    top: 35%;
+    left: 8%;
+    width: 350px;
+    flex-direction: column;
+}
+
+.banner .texto h2 {
+    color: #eee;
+    font-size: 26px;
+}
+
+.banner .texto span {
+    color: #eee;
+    font-weight: lighter;
+    margin-top: 10px;
+}
+
+/* Fim banner */
+
+/* Estilo de todos os titulos da página */
+
+.titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* Introdução */
+
+.introducao .container {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between;
+    width: 85%;
+    margin-bottom: 80px;
+}
+
+.introducao .texto {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.introducao .texto h2 {
+    font-size: 30px;
+}
+
+.introducao .texto span {
+    font-size: 18px;
+}
+
+.introducao .container .texto {
+    margin-left: 40px;
+}
+
+.introducao .imagens img {
+    height: 300px;
+    width: 500px;
+    border-radius: 10px;
+}
+
+/* Fim introdução */
+
+/* Perigo */
+
+.perigo .container {
+    display: flex;
+    width: 85%;
+    margin: auto;
+    margin-bottom: 80px;
+}
+
+.perigo .card {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 450px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+}
+
+.perigo .card .texto-perigo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 600px;
+}
+
+.perigo .card ul {
+    list-style: none;
+}
+
+.perigo .card li strong {
+    color: var(--amerela);
+}
+
+.perigo .card img {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+}
+
+/* Fim perigo */
+
+
+/* Como funciona */
+
+.como-funciona {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 80px;
+}
+
+.como-funciona .card-container {
+   display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 250px;
+}
+
+.como-funciona .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.como-funciona .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.card img {
+    width: 150px;
+}
+
+.card .numero {
+    font-size: 20px;
+    font-weight: bold;
+} 
+
+.card .titulo {
+    font-size: 20px;
+    color: var(--amerela);
+}
+
+.card .texto {
+    width: 200px;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Fim como funciona */
+
+/* Beneficios */
+
+.beneficios {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 80px;
+}
+
+.beneficios .card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    padding: 10px;
+    width: 550px ;
+    height: 320px;
+    gap: 20px;
+    border-radius: 5px;
+    
+}
+
+.beneficios .card h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.beneficios .imagem img{
+    width: 550px;
+    height: 320px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+
+/* Fim beneficios */
+

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard-Gerais</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./css/style_dashboard.css">
+</head>
+
+<body onload="obterDadosGrafico()">
+
+    <!-- Menu Lateral -->
+
+    <div class="menu_lateral">
+        <div class="container">
+            <div class="perfil">
+                <img src="./assets/img/perfil.png" id="logo_slogan_branco">
+
+                <span id="nome">Nome do Usuário</span>
+            </div>
+
+            <ul class="links">
+                <li>
+                    <a href="./dashboard.html">Gerais</a>
+                </li>
+                <li>
+                    <select onchange="window.location.href = this.value">
+                        <option>Silos</option>
+                        <option value="./telas_dashbboard/silo_A.html">Silo A</option>
+                        <option value="./telas_dashbboard/silo_B.html">Silo B</option>
+                    </select>
+                </li>
+            </ul>
+            <a href="./index.html" class="botao_sair">Sair</a>
+        </div>
+    </div>
+
+    <main>
+
+        <div class="titulo">
+            <div class="container">
+                <div style="text-align: center; margin: 20px 0;">
+                    <h2 style="font-weight: bold; color: #333;" id="h2Usuario">Olá usuário, você está vendo as métricas
+                        gerais dos
+                        silos
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpis">
+            <div class="container">
+
+                <div class="card">
+                    <div class="info">
+                        <span class="titulo">Percentual máximo de gás metano captado 06/06</span>
+                        <span class="dado" id="dadoMaximo">4.90% | Silo D</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="info">
+                        <span class="titulo">Percentual mínimo de gás metano captado 06/06</span>
+                        <span class="dado" id="dadoMinimo">0.20% | Silo A</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="info">
+                        <span class="titulo">Quantidades de silos monitorados</span>
+                        <span class="dado" id="silosMonitorados">2</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="info">
+                        <span class="titulo">Quantidades de silos no local</span>
+                        <span class="dado" id="silosTotais">10</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+
+        <div class="graficos">
+            <div class="container">
+                <div class="card">
+                    <canvas id="grafico_barra" width="400"></canvas>
+                </div>
+                <div class="card">
+                    <canvas id="grafico_linha"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="line-container">
+  <div class="range blue" title="0 – 1,24">0 – 1,24</div>
+  <div class="range green" title="1,25 – 2,49">1,25 – 2,49</div>
+  <div class="range yellow" title="2,50 – 3,74">2,50 – 3,74</div>
+  <div class="range red" title="3,75 – 5">3,75 – 5</div>
+</div>
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+    const grafico1 = document.getElementById('grafico_barra');
+    h2Usuario.innerHTML = `Olá ${sessionStorage.NOME_USUARIO}, você está vendo as métricas gerais dos silos`
+    new Chart(grafico1, {
+        type: 'line',
+        data: {
+            labels: [
+                '05/05', '06/05', '07/05', '08/05', '09/05', '10/05', '11/05', '12/05',
+                '13/05', '14/05', '15/05', '16/05', '17/05', '18/05', '19/05', '20/05',
+                '21/05', '22/05', '23/05', '24/05', '25/05', '26/05', '27/05', '28/05',
+                '29/05', '30/05', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06'
+            ], datasets: [{
+                label: 'Silo A',
+                data: [
+                    1.10, 1.20, 0.80, 0.50, 1.0, 1.10, 0.90, 0.30, 0.40, 0.80, 0.40, 0.30, 0.20, 0.60,
+                    0.60, 1.00, 0.90, 0.70, 0.80, 1.10, 0.50, 0.60, 0.90, 0.40,
+                    1.00, 0.80, 0.70, 0.60, 0.90, 0.50, 0.80, 1.10, 0.60, 0.40
+
+                ], borderWidth: 1,
+                backgroundColor: '#3f88c5',
+                borderColor: '#3f88c5'
+            },
+            {
+                label: 'Silo B',
+                data: [
+                    1.10, 1.20, 1.80, 2.50, 2.0, 2.10, 2.90, 2.30, 2.40, 2.80, 2.40, 2.30, 2.20, 2.60,
+                    2.60, 3.00, 2.90, 2.70, 2.80, 3.10, 2.50, 2.60, 2.90, 2.40,
+                    3.00, 3.80, 3.70, 3.60, 3.90, 3.50, 3.80, 4.10, 3.60, 3.40
+
+                ], borderWidth: 1,
+                backgroundColor: '#d00000',
+                borderColor: '#d00000'
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Percentual máximo captado por dia (nos ultimos 30 dias)',
+                    color: '#222222',
+                    font: {
+                        size: 20,
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#333333',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff'
+                }
+            }
+        }
+    });
+
+    const lugar = document.getElementById('grafico_linha');
+
+    // new Chart(lugar, {
+    // type: 'line',
+    // data: {
+    //     labels: [
+    //         '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
+    //         '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00',
+    //         '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+    //     ], datasets: [{
+    //         label: 'Silo A',
+    //         data: [
+    //             1.10, 1.20, 0.80, 0.50, 1.0, 1.10, 0.90, 0.30, 0.40, 0.80, 0.40, 0.30, 0.20, 0.60,
+    //         ], borderWidth: 1,
+    //         backgroundColor: '#3f88c5',
+    //         borderColor: '#3f88c5'
+    //     },
+
+    //     {
+    //         label: 'Silo B',
+    //         data: [
+    //             1.90, 2.20, 2.90, 3.10, 3.15, 2.90, 1.90, 2.30, 2.40, 1.80, 2.40, 2.30, 1.20, 2.50,
+    //         ], borderWidth: 1,
+    //         backgroundColor: '#d00000',
+    //         borderColor: '#d00000'
+    //     },
+    //     ]
+    // },
+    // options: {
+    //     responsive: true,
+    //     plugins: {
+    //         legend: {
+    //             labels: {
+    //                 font: {
+    //                     size: 12
+    //                 }
+    //             }
+    //         },
+    //         title: {
+    //             display: true,
+    //             text: 'Média diária dos gases nos silos (por Hora)',
+    //             color: '#222222',
+    //             font: {
+    //                 size: 20,
+    //             }
+    //         },
+    //         tooltip: {
+    //             backgroundColor: '#333333',
+    //             titleColor: '#ffffff',
+    //             bodyColor: '#ffffff'
+    //         }
+    //     }
+    // }
+    // });
+
+</script>
+
+<script>
+    nome.innerHTML = sessionStorage.NOME_USUARIO;
+    function obterDadosGrafico() {
+        verifyFetchSilos = false;
+        verifyFetchSilosMedios = false;
+        fetch(`/grafico/silos`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log("deu true no gráfico 1")
+                    resposta.reverse();
+                    plotarGraficoSilo(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/grafico/silosMedios`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log("deu true no gráfico 2");
+                    // resposta.reverse();
+                    plotarGraficoSiloMedio(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+
+        fetch(`/grafico/silosMonitorados`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log("deu true na kpi 3 e 4");
+                    resposta.reverse();
+                    kpiSilosMonitorados(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+
+    let qualquer = ''
+    let data_qualquer = ''
+
+    function plotarGraficoSilo(resposta) {
+
+        let labels = [];
+        console.log('iniciando plotagem do gráfico...');
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Silo A',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(0, 0, 0)',
+                backgroundColor: 'rgb(255, 165, 0)',
+                tension: 0.1,
+
+            },
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log("gráfico 1");
+        console.log(resposta);
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (var i = 0; i < resposta.length; i++) {
+            dados.datasets[0].data.push(resposta[i].valor);
+            labels.push(resposta[i].data_format.substring(11, 16));
+        }
+
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+
+        let chartClass = new Chart(
+            document.getElementById(`grafico_barra`),
+            config,
+        )
+    };
+
+    function plotarGraficoSiloMedio(resposta) {
+        resposta.reverse();
+        let labels1 = [];
+        console.log('iniciando plotagem do gráfico...');
+        // Criando estrutura para plotar gráfico - dados
+
+        let dados1 = {
+            labels: labels1,
+            datasets: [{
+                label: 'Silo A',
+                data: [],
+                fill: false,
+                borderColor: '#3f88c5',
+                backgroundColor: '#3f88c5',
+                tension: 0.1,
+
+            },
+            {
+                label: 'Silo B',
+                data: [],
+                fill: false,
+                borderColor: '#d00000',
+                backgroundColor: '#d00000',
+                tension: 0.1,
+
+            }
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log("gráfico 2");
+        console.log(resposta);
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        var teste = resposta.length / 2;
+        var contadorTeste = 0;
+
+        for (var i = 0; i < resposta.length; i++) {
+            if (contadorTeste < teste) {
+                labels1.push(resposta[i].data_hora.substring(11, 19));
+                contadorTeste += 1;
+            }
+            if (resposta[i].fk1 == 1) {
+                dados1.datasets[0].data.push(resposta[i].valor);
+            } else {
+                dados1.datasets[1].data.push(resposta[i].valor);
+            }
+        }
+
+        var min0 = Math.min(...dados1.datasets[0].data);
+        var min1 = Math.min(...dados1.datasets[1].data);
+
+        var max0 = Math.max(...dados1.datasets[0].data);
+        var max1 = Math.max(...dados1.datasets[1].data);
+
+        if (min0 < min1) {
+            dadoMinimo.innerHTML = `${min0}% | Silo A`
+        } else {
+            dadoMinimo.innerHTML = `${min1}% | Silo B`
+        }
+
+        if (max0 > max1) {
+            dadoMaximo.innerHTML = `${max0}% | Silo A`
+        } else {
+            dadoMaximo.innerHTML = `${max1}% | Silo B`
+        }
+
+        // Criando estrutura para plotar gráfico - config
+
+        const config1 = {
+            type: 'line',
+            data: dados1,
+        };
+
+        // Adicionando gráfico criado em div na tela
+
+
+        let chartClass1 = new Chart(
+            document.getElementById(`grafico_linha`),
+            config1,
+        )
+        setTimeout(() => atualizarGrafico(dados1, chartClass1), 6000);
+    };
+
+    function kpiSilosMonitorados(resposta) {
+        console.log(resposta);
+        var contMonitorado = 0;
+        for (var i = 0; i < resposta.length; i++) {
+            if (resposta[i].fkSilo != "0") {
+                contMonitorado += 1;
+            }
+        }
+        console.log(contMonitorado);
+
+        silosMonitorados.innerHTML = contMonitorado;
+        silosTotais.innerHTML = resposta.length;
+    }
+
+
+    function atualizarGrafico(dados1, chartClass1) {
+        fetch(`/grafico/silosAtualizar/`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    // obterdados(idAquario);
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`data sem formatação ${data_qualquer}`)
+                    console.log(`data formatada ${qualquer}`)
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados1);
+
+                    // let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
+                    // avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].data_hora == dados1.labels[dados1.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].data_hora)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados1.labels[dados1.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados1.labels.shift(); // apagar o primeiro
+                        dados1.labels.push(novoRegistro[0].data_hora.substring(11, 19)); // incluir um novo momento
+
+                        dados1.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados1.datasets[0].data.push(novoRegistro[0].valor); // incluir uma nova medida de umidade
+
+                        dados1.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                        dados1.datasets[1].data.push(novoRegistro[1].valor); // incluir uma nova medida de temperatura
+
+                        chartClass1.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados1, chartClass1), 6000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados1, chartClass1), 6000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+</script>
